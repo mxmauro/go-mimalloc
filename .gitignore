@@ -1,0 +1,6 @@
+*.~*
+/.idea/
+/.vscode/
+/bin/
+/vendor
+/testdata/**/*_unmanaged.go
