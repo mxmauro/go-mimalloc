@@ -25,6 +25,6 @@ func main() {
 
 ## LICENSES
 
-Underlying `mimalloc` library: [MIT](/mimalloc_LICENSE.txt)
+Underlying `mimalloc` library: [MIT](/MIMALLOC_LICENSE)
 
-Wrapper: [MIT](/LICENSE.txt)
+Wrapper: [MIT](/LICENSE)
