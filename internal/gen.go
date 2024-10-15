@@ -1,3 +1,5 @@
+// See the LICENSE file for license details.
+
 package main
 
 import (
@@ -10,12 +12,11 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
-	"runtime"
 	"strings"
 )
 
 const (
-	mimallocVersion = "v2.1.2"
+	mimallocVersion = "v2.1.7"
 )
 
 var (
@@ -172,6 +173,9 @@ func (g *generator) extract(srcFile, targetFile string) error {
 	if err == nil {
 		var f *os.File
 
+		contents = bytes.ReplaceAll(contents, []byte("\r\n"), []byte("\n"))
+		contents = bytes.ReplaceAll(contents, []byte("\r"), []byte("\n"))
+
 		f, err = os.Create(filepath.Join(g.currDir, targetFile))
 		if err == nil {
 			_, err = f.Write(contents)
@@ -195,13 +199,8 @@ func (g *generator) createAmalgamation(targetFile string) error {
 	// Write amalgamated file
 	f, err = os.Create(filepath.Join(g.currDir, targetFile))
 	if err == nil {
-		newLine := "\n"
-		if runtime.GOOS == "windows" {
-			newLine = "\r\n"
-		}
-
 		for _, line := range g.amalgamationLines {
-			_, err = f.WriteString(line + newLine)
+			_, err = f.WriteString(line + "\n")
 			if err != nil {
 				break
 			}

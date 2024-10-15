@@ -18,13 +18,16 @@ import (
 
 func main() {
 	ptr := mimalloc.Malloc(1000)
+	if ptr == nil {
+		panic("insufficient memory")
+    }
+	defer mimalloc.Free(ptr)
+
 	// Do whatever
-	mimalloc.Free(ptr)
+	
 }
 ```
 
-## LICENSES
+## LICENSE
 
-Underlying `mimalloc` library: [MIT](/MIMALLOC_LICENSE)
-
-Wrapper: [MIT](/LICENSE)
+Like the original mimalloc code, this wrapper also uses the [MIT](/LICENSE) license.
